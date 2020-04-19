@@ -10,8 +10,10 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -31,6 +33,10 @@ public class EventControllerTest {
 		@Autowired
 		ObjectMapper objectMapper;
 		
+		//WebMvcTest MockBean은 컨트롤러역할의 빈들은 등록하지만 다른것들은 하지 않는다.
+		@MockBean
+		EventRepository eventRepository; //해당 의존성이 필요하다.
+		
 		@Test
 		public void createEvent() throws Exception {
 			//isCreated 201
@@ -45,6 +51,9 @@ public class EventControllerTest {
 					.location("강남역 D2 스타텁 팩토리")
 					.build();
 			
+			//save 이벤트가 발생 하면  event를 리턴 하라
+			event.setId(10);
+			Mockito.when(eventRepository.save(event)).thenReturn(event);
 			
 			mockMvc.perform(post("/api/events/")
 					.contentType(MediaType.APPLICATION_JSON_UTF8)

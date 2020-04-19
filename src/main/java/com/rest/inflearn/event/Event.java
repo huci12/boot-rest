@@ -3,6 +3,8 @@ package com.rest.inflearn.event;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +31,6 @@ public class Event {
 	private int limitOfEnrollment;
 	private boolean offline;
 	private boolean free;
+	@Enumerated(EnumType.STRING)
 	private EventStatus eventStatus;
 }
