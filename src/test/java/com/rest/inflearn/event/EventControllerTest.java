@@ -3,11 +3,13 @@ package com.rest.inflearn.event;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
 
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -62,7 +65,13 @@ public class EventControllerTest {
 					)
 			.andDo(print())
 			.andExpect(status().isCreated())
-			.andExpect(jsonPath("id").exists());
+			.andExpect(jsonPath("id").exists())
+			//.andExpect(header().exists("Location"))
+			.andExpect(header().exists(HttpHeaders.LOCATION)) //TYPE SAFE 하게 정의 할수 있다.
+			//.andExpect(header().string("Content-Type", "application/hal+json"))
+			.andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_VALUE)); //TYPE SAFE 하게
+			
+			
 			
 		}
 }
