@@ -2,17 +2,13 @@ package com.rest.inflearn.event;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-
-@Builder @AllArgsConstructor @NoArgsConstructor
-@Getter @Setter @EqualsAndHashCode(of = "id")
-@Entity
-public class Event {
-
-	@Id @GeneratedValue
-	private Integer id;
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class EventDto {
 	
 	private String name;
 	private String description;
@@ -24,8 +20,6 @@ public class Event {
 	private int basePrice;//(Optional)
 	private int maxPrice;//(Optional)
 	private int limitOfEnrollment;
-	private boolean offline;
-	private boolean free;
-	@Enumerated(EnumType.STRING)
-	private EventStatus eventStatus = EventStatus.DRAFT;
+	
+	//받기로 한 값들만 정의
 }

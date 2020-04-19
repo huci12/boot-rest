@@ -1,6 +1,6 @@
 package com.rest.inflearn.event;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,14 +21,21 @@ import java.net.URI;
 public class EventController {
 
 	private final EventRepository eventRepository;
-	
-	public EventController(EventRepository eventRepository) {
+	private final ModelMapper modelMapper;
+	public EventController(EventRepository eventRepository , ModelMapper modelMapper) {
 		this.eventRepository = eventRepository;
+		this.modelMapper = modelMapper;
 	}
 	
+	
 	@PostMapping
-	public ResponseEntity createEvent(@RequestBody Event event) {
+	public ResponseEntity createEvent(@RequestBody EventDto eventDto) {
+		//Event event = Event.builder().name(eventDto.getName()).build();
+		//이런 과정을 거치지 않고 ModelMapper를 사용 하면 정보를 매핑 해줄수 있다.
+		Event event = modelMapper.map(eventDto, Event.class);
 		Event newEvent = this.eventRepository.save(event);
+		System.out.println("eventId가 왜 짜구 Null로 떨어지지");
+		System.out.println(newEvent.getId());
 		URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
 		return ResponseEntity.created(createdUri).body(event);
 	}
