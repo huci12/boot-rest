@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 public class EventTest {
-
+//Junit4 에서 TEST 클래스는 반드시 Pulbic 이어야 합니다. 
 	@Test
 	public void builder() {
 		Event event = Event.builder().name("Inflearn Spring REST API").description("REST API development with Spring").build();
