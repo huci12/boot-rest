@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class EventControllerTest {
-
+//JUnit4 에서는 public 으로 클래스가 선언 되어 있어야 합니다.
 	//계층별 테스트
 		@Autowired
 		MockMvc mockMvc;
