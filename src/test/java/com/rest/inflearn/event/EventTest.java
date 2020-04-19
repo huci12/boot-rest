@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 
 
-class EventTest {
+public class EventTest {
 
 	@Test
 	public void builder() {

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-class EventControllerTest {
+public class EventControllerTest {
 
 	//계층별 테스트
 		@Autowired
