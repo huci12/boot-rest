@@ -2,6 +2,8 @@ package com.rest.inflearn.event;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,6 +13,7 @@ import lombok.Setter;
 
 @Builder @AllArgsConstructor @NoArgsConstructor
 @Getter @Setter @EqualsAndHashCode(of = "id")
+@Entity
 public class Event {
 
 	private Integer id;
