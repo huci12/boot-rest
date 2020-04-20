@@ -34,8 +34,7 @@ public class EventController {
 		//이런 과정을 거치지 않고 ModelMapper를 사용 하면 정보를 매핑 해줄수 있다.
 		Event event = modelMapper.map(eventDto, Event.class);
 		Event newEvent = this.eventRepository.save(event);
-		System.out.println("eventId가 왜 짜구 Null로 떨어지지");
-		System.out.println(newEvent.getId());
+		
 		URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
 		return ResponseEntity.created(createdUri).body(event);
 	}
